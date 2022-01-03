@@ -1,10 +1,11 @@
 #include "./mlx_linux/mlx.h"
+#include <stdio.h>
 
 int	main(void)
 {
-/*	void	*mlx;
+	void	*mlx;
 	mlx = mlx_init();
-	(void)mlx;
+	printf("%p\n", mlx);
+
 	return (0);
-*/
 }
