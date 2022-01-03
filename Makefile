@@ -1,4 +1,4 @@
-SRCS = wololo.c
+SRCS = main.c
 
 OBJS = $(SRCS:.c=.o)
 

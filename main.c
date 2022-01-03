@@ -1,11 +1,13 @@
-#include "./mlx_linux/mlx.h"
-#include <stdio.h>
+#include "fdf.h"
 
 int	main(void)
 {
 	void	*mlx;
-	mlx = mlx_init();
-	printf("%p\n", mlx);
+	void	*mlx_win;
 
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1300, 880, "Que pasa neeeen!");
+	(void)mlx_win;
+	mlx_loop(mlx);
 	return (0);
 }
