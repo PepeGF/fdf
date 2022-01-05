@@ -1,5 +1,7 @@
 #include "fdf.h"
 #include <unistd.h>
+//	%s/usleep/\/\/usleep/g
+//	%s/\/\/usleep/usleep/g
 
 int	main(void)
 {
@@ -9,27 +11,35 @@ int	main(void)
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 500, 500, "Testing things");
-	mlx_pixel_put(mlx, win, 500/2, 500/2, 0xFFFFFF);
+	usleep(1000);
+	//mlx_pixel_put(mlx, win, 500/2, 500/2, 0xffffff);
 	int i = 0;
-//	char aux = 65;
+	char aux = 65;
 	while (++i <= 50)
 	{
-	usleep(1000);
+	usleep(10000);
 //		write (1, &aux, 1);
-	usleep(10);
-	mlx_pixel_put(mlx, win, 500/2+i, 500/2+i, 0x00ff00);
-	usleep(10);
-	mlx_pixel_put(mlx, win, 500/2-i, 500/2+i, 0xff0000);
-	usleep(10);
-	mlx_pixel_put(mlx, win, 500/2+i, 500/2-i, 0x0000ff);
-	usleep(10);
+	usleep(10000);
+	mlx_pixel_put(mlx, win, 500/2+i, 500/2+i, 0xffffff);
+	usleep(10000);
+	mlx_pixel_put(mlx, win, 500/2-i, 500/2+i, 0xffffff);
+	usleep(10000);
+	mlx_pixel_put(mlx, win, 500/2+i, 500/2-i, 0xffffff);
+	usleep(10000);
 	mlx_pixel_put(mlx, win, 500/2-i, 500/2-i, 0xffffff);
-	usleep(10);
-//	aux++;
-//	if (aux == 90)
-//		aux = 65;
+	usleep(10000);
+	mlx_pixel_put(mlx, win, 500/2, 500/2+i, 0xffffff);
+	usleep(10000);
+	mlx_pixel_put(mlx, win, 500/2-i, 500/2, 0xffffff);
+	usleep(10000);
+	mlx_pixel_put(mlx, win, 500/2+i, 500/2, 0xffffff);
+	usleep(10000);
+	mlx_pixel_put(mlx, win, 500/2, 500/2-i, 0xffffff);
+	usleep(10000);
+	aux++;
+	if (aux == 90)
+		aux = 65;
 	}
-	write(1, "\n", 1);
 	mlx_loop(mlx);
 	return (0);
 }
