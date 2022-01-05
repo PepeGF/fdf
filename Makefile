@@ -14,7 +14,7 @@ ifeq ($(shell uname), Linux)
 	#LIBMLX_PATH = ./mlx_linux/
 	OBJ_COMPIL = -I/usr/include -Imlx_linux -O3 -c $< -o $@
 	LIB_FLAGS = -L/usr/lib -lXext -lX11 -lm -lz
-	LIB_COMPIL = -Lmlx_linux -lmlx $(LIBS_FLAGS)
+	LIB_COMPIL = -Lmlx_linux -lmlx $(LIB_FLAGS)
 else
 	OBJ_COMPIL = -Imlx -c $< -o $@
 	LIB_COMPIL = -lmlx -framework OpenGL -framework AppKit -o $(NAME)
