@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/01/05 13:35:42 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/01/05 22:23:54 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,15 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h> 
+# include <X11/keysym.h>
 # include "./mlx_linux/mlx.h"
 //# include <mlx.h>
 
 typedef struct s_data
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	void	*mlx_ptr;
+	void	*win_ptr;
 }	t_data;
 
 #endif 
