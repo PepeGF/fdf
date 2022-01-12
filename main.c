@@ -15,46 +15,33 @@ int	handle_no_event(void *data)
 
 int	handle_input(int keysum, t_data *data)
 {
-	if (keysum == XK_Escape)
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	(void)data;
+	if (keysum == 53/*XK_Escape*/)
+	{exit(0);}
+//		mlx_destroy_image/*window*/(data->mlx_ptr, data->win_ptr);
 	return (0);
 }
 
+void	like_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_lenght + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
 int	main(void)
 {
-	t_data	data;
+	void	*mlx;
+	void	*mlx_win;
+	t_data	img;
 
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == NULL)
-		return (MLX_ERROR);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Testing things");
-	if (data.win_ptr == NULL)
-	{
-		free(data.mlx_ptr);
-		return (MLX_ERROR);
-	}
-	usleep(10000);
-	mlx_pixel_put(data.mlx_ptr, data.win_ptr, WIN_WIDTH/2, WIN_HEIGHT/2, 0xffffff);
-	int i = 1;
-	while (i <= 240)
-	{
-	usleep(10);
-	mlx_pixel_put(data.mlx_ptr, data.win_ptr, WIN_WIDTH/2+i, WIN_HEIGHT/2+i, 0x0000ff);
-	mlx_pixel_put(data.mlx_ptr, data.win_ptr, WIN_WIDTH/2-i, WIN_HEIGHT/2+i, 0x00ff00);
-	mlx_pixel_put(data.mlx_ptr, data.win_ptr, WIN_WIDTH/2+i, WIN_HEIGHT/2-i, 0xff0000);
-	mlx_pixel_put(data.mlx_ptr, data.win_ptr, WIN_WIDTH/2-i, WIN_HEIGHT/2-i, 0xff00ff);
-	i += 1;
-	}
-	/* Setup hooks */
-	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
-	mlx_key_hook(data.win_ptr, &handle_input, &data);
-
-	mlx_loop(data.mlx_ptr);
-
-/*	Si se deja esta línea se produce un bus error  */
-//	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr);
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "Wololo");
+	img.img = mlx_new_image(mlx, 500, 500);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_lenght, &img.endian);
+	like_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_loop(mlx);
 	return (0);
 }
 

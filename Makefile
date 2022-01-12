@@ -15,12 +15,15 @@ ifeq ($(shell uname), Linux)
 	OBJ_COMPIL = -I/usr/include -Imlx_linux -O3 -c $< -o $@
 	LIB_FLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 	LIB_COMPIL = -Lmlx_linux -lmlx $(LIB_FLAGS)
+	SO = Linux
 else
 	OBJ_COMPIL = -Imlx -c $< -o $@
 	LIB_COMPIL = -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	SO = Mac
 endif
 
 all: $(NAME)
+	@echo $(SO)
 
 %.o:%.c
 	@$(CC) $(CFLAGS) $(OBJ_COMPIL)
