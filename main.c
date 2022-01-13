@@ -7,21 +7,6 @@
 //	%s///usleep/\/\///usleep/g
 //	%s/\/\///usleep///usleep/g
 
-int	handle_no_event(void *data)
-{
-	(void)data;
-	return (0);
-}
-
-int	handle_input(int keysum, t_data *data)
-{
-	(void)data;
-	if (keysum == 53/*XK_Escape*/)
-	{exit(0);}
-//		mlx_destroy_image/*window*/(data->mlx_ptr, data->win_ptr);
-	return (0);
-}
-
 void	like_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -29,22 +14,74 @@ void	like_mlx_pixel_put(t_data *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_lenght + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
-int	main(void)
-{
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "Wololo");
-	img.img = mlx_new_image(mlx, 500, 500);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_lenght, &img.endian);
-	like_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+int	key_hook(int keycode, t_vars *vars)
+{
+	(void)vars;
+	if (keycode == 53)
+	{
+		exit (0);
+	}
+	printf("Wololo!!!\n");
 	return (0);
 }
 
+int	mouse_hook(int keycode, t_vars vars)
+{
+	(void) vars;
+	if (keycode == 3)
+	{
+		exit (0);
+	}
+	else
+	{
+		printf("raton\n");
+	}
+	return (0);
+}
+
+void	leaks(void)
+{
+	system ("leaks --fullContent fdf > leak_report");
+}
+
+int	main(void)
+{
+	void	*mlx;
+	void	*win;
+	void	*win2;
+
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 500, 500, "SUPER WOLOLO");
+	win2 = mlx_new_window(mlx, 500, 500, "SUPER WOLOLO");
+	mlx_string_put(mlx, win, 100, 100, 0xFFFFFF, "Mas wololo que nunca");
+	mlx_string_put(mlx, win2, 100, 105, 0x01FF00FF, "Mas wololo que nunca");
+	mlx_loop(mlx);
+	atexit(leaks);
+	return (0);
+}
+/*
+int	main(void)
+{
+	t_vars	vars;
+	t_data	img;
+	void	*ptr = malloc(19876);
+	ptr = 0;
+
+	atexit(leaks);
+
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "Wololo");
+	img.img = mlx_new_image(vars.mlx, 500, 500);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_lenght, &img.endian);
+	like_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
+	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	mlx_key_hook(vars.win, &key_hook, &vars);//puede que el & de key_hook sobre
+	mlx_mouse_hook(vars.win, &mouse_hook, &vars);
+	mlx_loop(vars.mlx);
+	return (0);
+}
+*/
 int	rgb_to_int(double r, double g, double b)
 {
 	int	color;
