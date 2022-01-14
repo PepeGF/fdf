@@ -20,6 +20,7 @@ int	map_length(char *line)
 	{
 		if (line[i] == ' ' && line[i + 1] != ' ' && line[i + 1] != '\n')
 			length++;
+		//aqui deberia obtener la y de cada punto
 		i++;
 	}
 	length++;
@@ -33,6 +34,7 @@ void	get_map_size(t_coords *map, char *file)
 
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
+	//aqui deberia obtener la x de cada punto
 	map->x = map_length(line);
 	map->y = 0;
 	while (line)
@@ -52,7 +54,6 @@ int main(int argc, char *argv[])
 	printf("Eje x: %d\nEje y: %d\n", map.x, map.y);
 	return 0;
 }
-
 
 /*
 void	like_mlx_pixel_put(t_data *data, int x, int y, int color)
