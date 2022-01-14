@@ -6,6 +6,54 @@
 #define WIN_HEIGHT 600
 //	%s///usleep/\/\///usleep/g
 //	%s/\/\///usleep///usleep/g
+
+int	map_length(char *line)
+{
+	int	length;
+	int	i;
+
+	length = 0;
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	while (line[i])
+	{
+		if (line[i] == ' ' && line[i + 1] != ' ' && line[i + 1] != '\n')
+			length++;
+		i++;
+	}
+	length++;
+	return (length);
+}
+
+void	get_map_size(t_coords *map, char *file)
+{
+	int		fd;
+	char	*line;
+
+	fd = open(file, O_RDONLY);
+	line = get_next_line(fd);
+	map->x = map_length(line);
+	map->y = 0;
+	while (line)
+	{
+		map->y++;
+		line = get_next_line(fd);
+	}
+	close(fd);
+}
+
+int main(int argc, char *argv[])
+{
+	(void)argc;
+	t_coords	map;
+
+	get_map_size(&map, argv[1]);
+	printf("Eje x: %d\nEje y: %d\n", map.x, map.y);
+	return 0;
+}
+
+
 /*
 void	like_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -94,11 +142,4 @@ int	rgb_to_int(int r, int g, int b)
 	return (color);
 }
 
-int main()
-{
-	int color;
 
-	color = rgb_to_int(50, 100, 150);
-	printf("%d\n", color);
-	return 0;
-}
