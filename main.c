@@ -6,7 +6,7 @@
 #define WIN_HEIGHT 600
 //	%s///usleep/\/\///usleep/g
 //	%s/\/\///usleep///usleep/g
-
+/*
 void	like_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -60,6 +60,7 @@ int	main(void)
 	atexit(leaks);
 	return (0);
 }
+*/
 /*
 int	main(void)
 {
@@ -82,13 +83,22 @@ int	main(void)
 	return (0);
 }
 */
-int	rgb_to_int(double r, double g, double b)
+int	rgb_to_int(int r, int g, int b)
 {
 	int	color;
 
 	color = 0;
-	color |= (int)(r * 255);
-	color |= (int)(g * 255) << 8;
-	color |= (int)(b * 255) << 16;
+	color += (r << 16);
+	color += (g << 8);
+	color += b;
 	return (color);
+}
+
+int main()
+{
+	int color;
+
+	color = rgb_to_int(50, 100, 150);
+	printf("%d\n", color);
+	return 0;
 }
