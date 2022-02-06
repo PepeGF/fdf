@@ -7,6 +7,44 @@
 //	%s///usleep/\/\///usleep/g
 //	%s/\/\///usleep///usleep/g
 
+
+/*
+ *
+ *
+ *              * * * * * NO BORRAR ESTA PARTE * * * * * * * * 
+ *
+ * * * * puede ser util en el futuro para hacer listas de cosas complejas * * *
+ * * * * sin necesidad de adaptar las funciones lstnew, lstaddback, etc * * * *
+ *
+ * Lee el mapa, cuenta las filas, las columnas, hace split de los elementos de
+ * cada linea, saca su x su y y su z y os almacena en una estrucctura, con lo
+ * escrito aqui el color se da por hecho que es 0.
+ *
+ * Se basa en usar esta estructura:
+ *
+ * //////////////////////////// *
+ * typedef struct s_point
+{
+	int					x;
+	int					y;
+	int					z;
+	unsigned int		color;
+	struct s_point		*next;
+}	t_point;
+ * /////////////////////////// *
+
+void print_lst(t_list **lst)
+{
+	t_list	*aux;
+
+	aux = *lst;
+	while (aux)
+	{
+		printf("x:%d, y:%d, z:%d, color:%d | ", ((t_point*)(aux->content))->x, ((t_point*)(aux->content))->y, ((t_point*)(aux->content))->z , ((t_point*)(aux->content))->color);
+		aux=aux->next;
+	}
+}
+
 int	map_length(char *line)
 {
 	int	length;
@@ -20,42 +58,169 @@ int	map_length(char *line)
 	{
 		if (line[i] == ' ' && line[i + 1] != ' ' && line[i + 1] != '\n')
 			length++;
-		//aqui deberia obtener la y de cada punto
 		i++;
 	}
 	length++;
 	return (length);
 }
 
-void	get_map_size(t_coords *map, char *file)
+void	ft_split_mapline(char *line, t_list **point_lst, int num_line)
+{
+	int		i;
+	int		j;
+	char	**str;
+	t_point	*point;
+
+(void)j;
+(void)point;
+(void)point_lst;
+(void)num_line;
+	i = 0;
+	str = ft_split(line, ' ');
+	while (str && str[i] && (char)str[i] != '\n')
+	{
+		if (!ft_strchr(str[i], ',') && !ft_strchr(str[i], '\n'))
+		{
+			point = malloc(sizeof(t_point));
+			point->x = i;
+			point->y = num_line;
+			point->z = ft_atoi(str[i]);
+			point->color = 0;
+			ft_lstadd_back(point_lst, (ft_lstnew((t_point*)point)));
+		}
+		else
+		{
+			//meter split para el color
+		}
+		free(str[i]);
+		i++;
+	}
+	printf("\n");
+	free(str);
+}
+
+void	get_map_size(t_coords *map, t_list **point, char *file)
 {
 	int		fd;
 	char	*line;
+	int		num_line;
 
 	fd = open(file, O_RDONLY);
+	num_line = 0;
 	line = get_next_line(fd);
-	//aqui deberia obtener la x de cada punto
+//	sleep(30);
 	map->x = map_length(line);
 	map->y = 0;
 	while (line)
 	{
 		map->y++;
+		ft_split_mapline(line, point, num_line);
+		free(line);
 		line = get_next_line(fd);
+		num_line++;
 	}
+	print_lst(point);
 	close(fd);
 }
 
+void	leaks(void)
+{
+	system ("leaks fdf");
+}
 int main(int argc, char *argv[])
 {
 	(void)argc;
 	t_coords	map;
+	t_list *point;
 
-	get_map_size(&map, argv[1]);
-	printf("Eje x: %d\nEje y: %d\n", map.x, map.y);
+//	atexit(leaks);
+	point = 0;
+	get_map_size(&map, &point, argv[1]);
+	printf("\nEje x: %d\nEje y: %d\n", map.x, map.y);
+	printf("%lu\n",sizeof(t_point));
 	return 0;
 }
+*/
 
 /*
+void	ft_split_mapline(char *line, int num_line)
+{
+	int			i;
+	int			j;
+	char		**str;
+	t_coords	*point;
+}
+*/
+int	ft_map_length(char *line)
+{
+	int	length;
+	int	i;
+
+	length = 0;
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	while (line[i])
+	{
+		if (line[i] == ' ' && line[i + 1] != ' ' && line[i + 1] != '\n')
+			length++;
+		i++;
+	}
+	length++;
+	return (length);
+}
+
+void	ft_get_map_size(t_coords *map, char *file)
+{
+	int		fd;
+	char	*line;
+	int		num_line;
+
+	fd = open(file, O_RDONLY);
+	num_line = 0;
+	line = get_next_line(fd);
+	map->x = ft_map_length(line);
+	map->y = 0;
+	while (line)
+	{
+		map->y++;
+		free(line);
+		line = get_next_line(fd);
+		num_line++;
+	}
+	close (fd);
+	close(fd);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_coords	maps;
+	t_point		*points_array;
+
+	if (argc != 2)
+		return (33);//no va hacer nada
+	ft_get_map_size(&maps, argv[1]);
+	printf("x: %d, y: %d\n", maps.x, maps.y);
+	points_array = malloc(sizeof(t_point *) * maps.x * maps.y);
+	printf("%p\n", points_array);
+	return (0);
+
+}
+
+
+
+
+
+/*
+ *
+ *
+ * * * * * * ESTA PARTE ES DE PRUEBAS DE MINILIBX * * * * * * *
+ * 
+ *
+ * * * * * * * * * * * * no vale para mucho * * * * * * * * * * * * * 
+ *
+ *
+ *
 void	like_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;

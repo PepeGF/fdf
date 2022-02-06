@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/01/14 18:38:27 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:10:49 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 //# include "./mlx_linux/mlx.h"
 # include <mlx.h>
 # include "./gnl/get_next_line.h"
+# include "./libft/libft.h"
 
 typedef struct s_data
 {
@@ -45,6 +46,15 @@ typedef struct s_coords
 	int			z;
 	t_colors	colors;
 }	t_coords;
+
+typedef struct s_point
+{
+	int					x;
+	int					y;
+	int					z;
+	unsigned int		color;
+	struct s_point		*next;
+}	t_point;
 
 typedef struct s_vars
 {
