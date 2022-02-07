@@ -15,10 +15,10 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h> 
-//# include <X11/keysym.h>
-//# include "./mlx_linux/mlx.h"
-# include <mlx.h>
+# include <unistd.h>
+# include <X11/keysym.h>
+# include "./mlx_linux/mlx.h"
+// # include <mlx.h>
 # include "./gnl/get_next_line.h"
 # include "./libft/libft.h"
 
