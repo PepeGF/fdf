@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/01/17 20:10:49 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/02/07 19:43:56 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+// Linux
 # include <X11/keysym.h>
 # include "./mlx_linux/mlx.h"
+// Mac
 // # include <mlx.h>
 # include "./gnl/get_next_line.h"
 # include "./libft/libft.h"

@@ -1,4 +1,5 @@
 *.o
+*.a
 fdf
 a.out
 man3printf.pdf

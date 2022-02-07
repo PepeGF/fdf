@@ -1,11 +1,21 @@
 #include "fdf.h"
 
-//#include "/usr/include/X11/keysym.h"
 #define MLX_ERROR 1
 #define WIN_WIDTH 800
 #define WIN_HEIGHT 600
 //	%s///usleep/\/\///usleep/g
 //	%s/\/\///usleep///usleep/g
+
+/*	De momento este programa solo abre el archivo que contiene el mapa
+ *	lo lee línea a línea
+ *	cuenta cuántos puntos hay en la primera línea
+ *	cuenta cuántas líneas hay
+ *	y prepara un array de x*y para almacenar estructuras q contienen
+ *	las coordenadas de los puntos y el color
+ *
+ *	La parte del array no sirve más que para pruebas básicas, no es un array lo
+ *	que necesito, si no una matrix (array de arrays), que no se plantear
+ */
 
 int	ft_map_length(char *line)
 {
@@ -31,7 +41,19 @@ void	ft_get_map_size(t_coords *map, char *file)
 	int		fd;
 	char	*line;
 	int		num_line;
-
+/*
+	//con esto habría que abrir el archivo 2 veces. NO quiero.
+	//para no abrirlo 2 veces hay que almacenar las líneas en una lista
+	//ese es el siguiente paso a implementar
+	//
+	//Hay que editar libft.h y hacer la estructura de lista cuyo contenido sea
+	//un puntero a char y el puntero next.
+	//Hay que hacer un malloc de la longitud bruta de la línea
+	//		|_-> NO, eso ya lo hace GNL
+	//xq vamos a almacenar el texto tal cual
+	//dejar preparada una función para liberar la lista cuando ya se haya formado
+	//la matrix de números
+*/
 	fd = open(file, O_RDONLY);
 	num_line = 0;
 	line = get_next_line(fd);
@@ -42,9 +64,9 @@ void	ft_get_map_size(t_coords *map, char *file)
 		map->y++;
 		free(line);
 		line = get_next_line(fd);
+		//aqui podría implementar una verificación de longitud de línea
 		num_line++;
 	}
-	close (fd);
 	close(fd);
 }
 
