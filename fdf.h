@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/02/07 19:43:56 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/03/07 20:28:29 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "./gnl/get_next_line.h"
 # include "./libft/libft.h"
 
+/* ni idea de para que usar esta estructura, creo que es para algo de minilib*/
 typedef struct s_data
 {
 	void	*img;
@@ -33,6 +34,7 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
+/* Estructura para almacenar colores */
 typedef struct s_colors
 {
 	int				r;
@@ -41,6 +43,9 @@ typedef struct s_colors
 	unsigned int	rgb;
 }	t_colors;
 
+/* estructura para almacenar coordenadas y color */
+//ni idea de para cuando y xq
+//parece que para el mapa
 typedef struct s_coords
 {
 	int			x;
@@ -49,6 +54,7 @@ typedef struct s_coords
 	t_colors	colors;
 }	t_coords;
 
+/* Estructura para listas de puntos con coordenadas y color */
 typedef struct s_point
 {
 	int					x;
@@ -58,6 +64,7 @@ typedef struct s_point
 	struct s_point		*next;
 }	t_point;
 
+/* Estructura para ventanas, pero no me acuerdo */
 typedef struct s_vars
 {
 	void	*mlx;

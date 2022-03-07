@@ -47,12 +47,12 @@ void	ft_get_map_size(t_coords *map, char *file)
 	//ese es el siguiente paso a implementar
 	//
 	//Hay que editar libft.h y hacer la estructura de lista cuyo contenido sea
-	//un puntero a char y el puntero next.
+	//un puntero a char y el puntero next. --> HECHO
 	//Hay que hacer un malloc de la longitud bruta de la línea
 	//		|_-> NO, eso ya lo hace GNL
 	//xq vamos a almacenar el texto tal cual
 	//dejar preparada una función para liberar la lista cuando ya se haya formado
-	//la matrix de números
+	//la matriz de números
 */
 	fd = open(file, O_RDONLY);
 	num_line = 0;
@@ -61,6 +61,8 @@ void	ft_get_map_size(t_coords *map, char *file)
 	map->y = 0;
 	while (line)
 	{
+//		añadir aquí a la lista de raw_map  <<<------<<<<----SEGUIR AQUI
+//		printf("%s", line);
 		map->y++;
 		free(line);
 		line = get_next_line(fd);
@@ -69,18 +71,43 @@ void	ft_get_map_size(t_coords *map, char *file)
 	}
 	close(fd);
 }
+t_list	*ft_save_map(t_list **raw_map, char *file)
+{
+	t_list	*wololo;
+	int 	fd;
+	char	*aux;
+
+	(void)raw_map;
+	(void)fd;
+	(void)aux;
+	fd = open(file, O_RDONLY);
+	aux = malloc (3000);
+	ft_bzero_gnl(aux, 3000);
+	read(fd, aux, 1000);
+	printf("%s\n",aux );
+	//	aux = get_next_line(fd);
+//	printf("%s",aux);
+	wololo = 0;
+	return (wololo);
+}
 
 int	main(int argc, char *argv[])
 {
+	t_list		*raw_map;
 	t_coords	maps;
 	t_point		*points_array;
 
 	if (argc != 2)
 		return (33);//no va hacer nada
+	(void)points_array;
+	(void)raw_map;
 	ft_get_map_size(&maps, argv[1]);
 	printf("x: %d, y: %d\n", maps.x, maps.y);
+/*	Estas dos líneas eran para pruebas, creo:
 	points_array = malloc(sizeof(t_point *) * maps.x * maps.y);
 	printf("%p\n", points_array);
+*/
+	ft_save_map(&raw_map, argv[1]);
 	return (0);
 
 }
