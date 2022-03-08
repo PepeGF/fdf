@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/03/07 20:28:29 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/03/08 21:05:47 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,12 @@ typedef struct s_colors
 /* estructura para almacenar coordenadas y color */
 //ni idea de para cuando y xq
 //parece que para el mapa
-typedef struct s_coords
+typedef struct s_coord
 {
 	int			x;
 	int			y;
 	int			z;
-	t_colors	colors;
-}	t_coords;
+}	t_coord;
 
 /* Estructura para listas de puntos con coordenadas y color */
 typedef struct s_point
@@ -71,4 +70,7 @@ typedef struct s_vars
 	void	*win;
 }	t_vars;
 
+int		ft_map_length(char *line);
+void	ft_save_map(t_list **raw_map, char *file);
+void	ft_free_map(t_list *raw_map);
 #endif 
