@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/03/08 21:05:47 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/03/09 21:10:13 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_lenght;
 	int		endian;
+	int		map_x;
+	int		map_y;
 }	t_data;
 
 /* Estructura para almacenar colores */
@@ -43,7 +45,7 @@ typedef struct s_colors
 	unsigned int	rgb;
 }	t_colors;
 
-/* estructura para almacenar coordenadas y color */
+/* estructura para almacenar coordenadas */
 //ni idea de para cuando y xq
 //parece que para el mapa
 typedef struct s_coord
@@ -60,7 +62,6 @@ typedef struct s_point
 	int					y;
 	int					z;
 	unsigned int		color;
-	struct s_point		*next;
 }	t_point;
 
 /* Estructura para ventanas, pero no me acuerdo */
