@@ -6,7 +6,7 @@ NAME = libgnl.a
 
 CC = gcc
 
-CFLAGSS = -Wall -Werror -Wextra
+CFLAGSS = -g -O0 -Wall -Werror -Wextra
 
 RM = rm -f
 

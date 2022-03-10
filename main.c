@@ -38,7 +38,7 @@ int	ft_map_length(char *line)
 /* Función para guardar el mapa en memoria y no tener que abrir el archivo
  * del mapa varias veces
  */
-void	ft_save_map(t_list **raw_map, char *file)
+void	ft_read_map(t_list **raw_map, char *file)
 {
 	int		fd;
 	char	*line;
@@ -74,36 +74,57 @@ void	ft_free_map(t_list *raw_map)
 	return ;
 }
 
-void	ft_prepare_map(t_list *raw_map, t_point ***points, t_coord map_size)
+/* Función para rellenar el array de int creado en la función de create array
+ *
+ * SIGUIENTE ----->>>> LIBERAR MEMORIA RESERVADA POR FT_SPLIT
+ *
+ * Queda hacer que también lea el color (como leer color en hexadecimal??)
+ *
+ */
+void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size)
 {
 	char	**splited;
 	t_list	*aux;
-	int		k;
 	int		j;
 	int		i;
 
-	*points = malloc(sizeof(t_point *) * map_size.y);
-	k = 0;
 	aux = raw_map;
+	i = 0;
 	while (aux)
 	{
-		splited = ft_split(aux->content);
-		while (splited[k])
+		splited = ft_split(aux->content, ' ');
+		j = 0;
+		while (j < map_size.x)
 		{
-			while (i < map)
-			*points[i][j]
-			i++;
+			points[i][j].x = j;
+			points[i][j].y = i;
+			points[i][j].z = ft_atoi(splited[j]);
+			printf("%d|%d|%d ", points[i][j].x, points[i][j].y, points[i][j].z);
+			j++;
 		}
+		printf("\n");
+		i++;
 		aux = aux->next;
 	}
+}
 
-	(void)raw_map;
-	(void)points;
-	(void)map_size;
+/* Función que crea el array bidimensional en el que cada elemento es una
+ * estructura para almacenar las coordenadas x,y,z y el color de cada punto
+ *
+ * Queda hacer una función que libere el array cuando ya no hace falta más
+ *
+ */
+void	ft_map_create_array(t_point ***points, t_coord map_size)
+{
+	int	i;
 
-
-
-	
+	i = 0;
+	*points = malloc(sizeof(t_point *) * map_size.y);
+	while (i < map_size.y)
+	{
+		(*points)[i] = malloc(sizeof(t_point) * map_size.x);
+		i++;
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -114,42 +135,13 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		return (33);
-	raw_map = 0;
-//	points = 0;
-//	(void)points;
-	ft_save_map(&raw_map, argv[1]); //cambiar en fdf.h
+	raw_map = NULL;
+	ft_read_map(&raw_map, argv[1]);
 	map_size.x = ft_map_length(raw_map->content);
 	map_size.y = ft_lstsize(raw_map);
-	ft_prepare_map(raw_map, &points, map_size);	
-	int	i;
-	int j;
-
-	i = 0;
-	points = malloc(sizeof(t_point *) * map_size.y);
-	while (i < map_size.y)
-	{
-		points[i] = malloc(sizeof(t_point) * map_size.x);
-		i++;
-	}
-	i = 0;
-	while (i < map_size.y)
-	{
-		j = 0;
-		while (j < map_size.x)
-		{
-			points[i][j].x = i + 1;
-			points[i][j].y = j + 1;
-			printf("%d|%d ", points[i][j].x, points[i][j].y);
-//			printf("%p  ", &points[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-
-
+	ft_map_create_array(&points, map_size);
+	ft_map_int_array(raw_map, points, map_size);
 	ft_free_map(raw_map);
-	//función liberar matriz
 	return (0);
 }
 

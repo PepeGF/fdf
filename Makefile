@@ -6,7 +6,7 @@ NAME = fdf
 
 CC = gcc
 
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g -O0 -Wall -Werror -Wextra
 
 RM = rm -f
 
@@ -18,7 +18,7 @@ LIB_FT = -I$(LIBFT_PATH) -L$(LIBFT_PATH) -lft
 
 ifeq ($(shell uname), Linux)
 	#LIBMLX_PATH = ./mlx_linux/
-	OBJ_COMPIL = -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	OBJ_COMPIL = -I/usr/include -Imlx_linux -O0 -c $< -o $@
 	LIB_FLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 	LIB_COMPIL = -Lmlx_linux -lmlx $(LIB_FLAGS) $(LIB_GNL) $(LIB_FT)
 	SO = Linux
