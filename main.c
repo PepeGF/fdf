@@ -99,13 +99,34 @@ void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size)
 			points[i][j].x = j;
 			points[i][j].y = i;
 			points[i][j].z = ft_atoi(splited[j]);
-			printf("%d|%d|%d ", points[i][j].x, points[i][j].y, points[i][j].z);
+			free(splited[j]);
+			//printf("%d|%d|%d ", points[i][j].x, points[i][j].y, points[i][j].z);
 			j++;
 		}
-		printf("\n");
+		free(splited);
+	//	printf("\n");
 		i++;
 		aux = aux->next;
 	}
+}
+
+void	ft_map_free_array(t_point **points, t_coord map_size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < map_size.y)
+	{
+		free(points[i]);
+		i++;
+	}
+	free (points);
+	(void)map_size;
+	(void)points;
+	(void)i;
+	(void)j;
 }
 
 /* Función que crea el array bidimensional en el que cada elemento es una
@@ -142,6 +163,7 @@ int	main(int argc, char *argv[])
 	ft_map_create_array(&points, map_size);
 	ft_map_int_array(raw_map, points, map_size);
 	ft_free_map(raw_map);
+	ft_map_free_array(points, map_size);
 	return (0);
 }
 
