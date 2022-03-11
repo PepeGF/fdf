@@ -1,4 +1,4 @@
-SRCS = main.c
+SRCS = main.c map_manage.c map_free.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -35,8 +35,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBGNL_PATH) --silent
 	@$(MAKE) -C $(LIBFT_PATH) --silent
-	@$(CC) -o $(NAME) $? $(LIB_COMPIL) 
-	@echo "minilibX.a successfully compiled"
+	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) 
 	@echo $(NAME)": ready to be executed"
 
 clean:

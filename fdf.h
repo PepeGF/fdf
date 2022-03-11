@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/03/10 21:36:56 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/03/11 20:07:22 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,13 @@ typedef struct s_vars
 	void	*mlx;
 	void	*win;
 }	t_vars;
+
+/* Manage map functions*/
+void	ft_map_read(t_list **raw_map, char *file);
+void	ft_map_raw_free(t_list *raw_map);
+void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size);
+int		ft_map_length(char *line);
+void	ft_map_free_array(t_point **points, t_coord map_size);
+void	ft_map_create_array(t_point ***points, t_coord map_size);
 
 #endif 

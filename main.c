@@ -14,7 +14,6 @@
 
 /* Esta función mira lo ancho que es el mapa (coord X) 
  * para el alto (Y) con contar los elementos de la lista de raw_map vale
- */
 
 int	ft_map_length(char *line)
 {
@@ -34,11 +33,11 @@ int	ft_map_length(char *line)
 	length++;
 	return (length);
 }
+ */
 
 /* Función para guardar el mapa en memoria y no tener que abrir el archivo
  * del mapa varias veces
- */
-void	ft_read_map(t_list **raw_map, char *file)
+void	ft_map_read(t_list **raw_map, char *file)
 {
 	int		fd;
 	char	*line;
@@ -55,9 +54,10 @@ void	ft_read_map(t_list **raw_map, char *file)
 	close(fd);
 	return ;
 }
+ */
 
-/* Función para liberar raw_map cuando no sea necesario usarlo más */
-void	ft_free_map(t_list *raw_map)
+/* Función para liberar raw_map cuando no sea necesario usarlo más 
+void	ft_map_raw_free(t_list *raw_map)
 {
 	t_list	*aux;
 	t_list	*aux2;
@@ -73,14 +73,11 @@ void	ft_free_map(t_list *raw_map)
 	free(aux);
 	return ;
 }
+*/
 
 /* Función para rellenar el array de int creado en la función de create array
- *
- * SIGUIENTE ----->>>> LIBERAR MEMORIA RESERVADA POR FT_SPLIT
- *
  * Queda hacer que también lea el color (como leer color en hexadecimal??)
  *
- */
 void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size)
 {
 	char	**splited;
@@ -100,41 +97,36 @@ void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size)
 			points[i][j].y = i;
 			points[i][j].z = ft_atoi(splited[j]);
 			free(splited[j]);
-			//printf("%d|%d|%d ", points[i][j].x, points[i][j].y, points[i][j].z);
+			//printf("%d|%d|%d ", points[i][j].x, points[i][j].y, points[i][j].z *3 + 3);
 			j++;
 		}
 		free(splited);
-	//	printf("\n");
+		//printf("\n");
 		i++;
 		aux = aux->next;
 	}
 }
-
+ */
+/*
 void	ft_map_free_array(t_point **points, t_coord map_size)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	while (i < map_size.y)
 	{
 		free(points[i]);
 		i++;
 	}
 	free (points);
-	(void)map_size;
-	(void)points;
-	(void)i;
-	(void)j;
 }
+*/
 
 /* Función que crea el array bidimensional en el que cada elemento es una
  * estructura para almacenar las coordenadas x,y,z y el color de cada punto
  *
  * Queda hacer una función que libere el array cuando ya no hace falta más
  *
- */
 void	ft_map_create_array(t_point ***points, t_coord map_size)
 {
 	int	i;
@@ -147,6 +139,7 @@ void	ft_map_create_array(t_point ***points, t_coord map_size)
 		i++;
 	}
 }
+ */
 
 int	main(int argc, char *argv[])
 {
@@ -157,12 +150,12 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (33);
 	raw_map = NULL;
-	ft_read_map(&raw_map, argv[1]);
+	ft_map_read(&raw_map, argv[1]);
 	map_size.x = ft_map_length(raw_map->content);
 	map_size.y = ft_lstsize(raw_map);
 	ft_map_create_array(&points, map_size);
 	ft_map_int_array(raw_map, points, map_size);
-	ft_free_map(raw_map);
+	ft_map_raw_free(raw_map);
 	ft_map_free_array(points, map_size);
 	return (0);
 }
