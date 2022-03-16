@@ -65,6 +65,8 @@ void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size)
 			free(splited[j]);
 			j++;
 		}
+		if (splited[j])
+			free(splited[j]);
 		free(splited);
 		printf("\n");
 		i++;

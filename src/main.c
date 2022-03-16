@@ -151,7 +151,7 @@ int	main(int argc, char *argv[])
 	t_point		**points;
 	t_coord		map_size;
 
-	atexit(leakss);
+//	atexit(leakss);
 	if (argc != 2)
 		return (33);
 	raw_map = NULL;
