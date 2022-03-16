@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "../inc/fdf.h"
 
 void	ft_map_raw_free(t_list *raw_map)
 {

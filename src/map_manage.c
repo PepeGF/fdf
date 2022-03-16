@@ -1,9 +1,8 @@
-#include "fdf.h"
+#include "../inc/fdf.h"
 
 /* Función para guardar el mapa en memoria y no tener que abrir el archivo
  * del mapa varias veces
  */
-void	ft_map_read(t_list **raw_map, char *file)
 void	ft_map_read(t_list **raw_map, char *file)
 {
 	int		fd;
@@ -62,11 +61,11 @@ void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size)
 			points[i][j].x = j;
 			points[i][j].y = i;
 			points[i][j].z = ft_atoi(splited[j]);
-//			printf("%d|%d|%d ", points[i][j].x, points[i][j].y, points[i][j].z);
+			printf("%d|%d|%d ", points[i][j].x, points[i][j].y, points[i][j].z);
 			free(splited[j]);
 			j++;
 		}
-//		free(splited);
+		free(splited);
 		printf("\n");
 		i++;
 		aux = aux->next;

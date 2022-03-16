@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/03/11 20:07:22 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/03/15 21:00:42 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 // Linux
-# include <X11/keysym.h>
-# include "./mlx_linux/mlx.h"
+//# include <X11/keysym.h>
+//# include "./mlx_linux/mlx.h"
 // Mac
-// # include <mlx.h>
-# include "./gnl/get_next_line.h"
-# include "./libft/libft.h"
+# include <mlx.h>
+# include "../gnl/get_next_line.h"
+# include "../libft/libft.h"
 
 /* ni idea de para que usar esta estructura, creo que es para algo de minilib*/
 typedef struct s_data

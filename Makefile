@@ -1,20 +1,33 @@
-SRCS = main.c map_manage.c map_free.c
 
-OBJS = $(SRCS:.c=.o)
+### --- COLORS --- ###
+
+RED		= '\033[1;31m'
+GREEN	= '\033[1;32m'
+PURPLE	= '\033[1;35m'
+YELLOW	= '\033[1;33m'
+WHITE	= '\033[1;37m'
+BLUE	= '\033[1;34m'
 
 NAME = fdf
 
+LIB_GNL = -I$(LIBGNL_PATH) -L$(LIBGNL_PATH) -lgnl
+LIB_FT = -I$(LIBFT_PATH) -L$(LIBFT_PATH) -lft
+
+SRCS_PATH = src/
+INCS_PATH = include/
+BIN_PATH = bin/
+LIBGNL_PATH = gnl/
+LIBFT_PATH = libft/
+
+
+SRCS = main.c map_manage.c map_free.c
+
+OBJS = $(SRCS:%.c=bin/%.o)
+
 CC = gcc
-
-CFLAGS = -g -O0 -Wall -Werror -Wextra
-
+CFLAGS =-Wall -Werror -Wextra -g -O0 
 RM = rm -f
 
-LIBGNL_PATH = ./gnl/
-LIB_GNL = -I$(LIBGNL_PATH) -L$(LIBGNL_PATH) -lgnl
-
-LIBFT_PATH = ./libft/
-LIB_FT = -I$(LIBFT_PATH) -L$(LIBFT_PATH) -lft
 
 ifeq ($(shell uname), Linux)
 	#LIBMLX_PATH = ./mlx_linux/
@@ -27,24 +40,34 @@ else
 	LIB_COMPIL = -lmlx -framework OpenGL -framework AppKit $(LIB_FLAGS) $(LIB_GNL) $(LIB_FT) -o $(NAME)
 endif
 
+
+###		RULES		###
+
 all: $(NAME)
 
-%.o:%.c
+bin/%.o: src/%.c
+	@mkdir -p bin
 	@$(CC) $(CFLAGS) $(OBJ_COMPIL)
 
 $(NAME): $(OBJS)
+	@echo $(PURPLE)"[Creating libgnl]"$(BLUE)
 	@$(MAKE) -C $(LIBGNL_PATH) --silent
+	@echo $(PURPLE)"[Creating libft]"$(BLUE)
 	@$(MAKE) -C $(LIBFT_PATH) --silent
-	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) 
-	@echo $(NAME)": ready to be executed"
+	@echo $(PURPLE)"[Creating fdf]"$(BLUE)
+	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL)
+	@echo $(GREEN)"$(NAME): ready to be executed"
 
 clean:
 	@$(RM) $(OBJS)
+	@rm -rf bin/
 	@$(MAKE) -C $(LIBGNL_PATH) clean --silent
 	@$(MAKE) -C $(LIBFT_PATH) clean --silent
+	@echo $(RED)"[Object Files Deleted]"$(WHITE)
 
 fclean: clean
 	@$(RM) $(NAME)
+	@echo $(RED)"[Executable File Deleted]"$(WHITE)
 	@$(MAKE) -C $(LIBGNL_PATH) fclean --silent
 	@$(MAKE) -C $(LIBFT_PATH) fclean --silent
 

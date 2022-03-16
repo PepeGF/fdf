@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "../inc/fdf.h"
 
 #define MLX_ERROR 1
 #define WIN_WIDTH 800
@@ -140,6 +140,10 @@ void	ft_map_create_array(t_point ***points, t_coord map_size)
 	}
 }
  */
+void	leakss()
+{
+	system ("leaks fdf");
+}
 
 int	main(int argc, char *argv[])
 {
@@ -147,6 +151,7 @@ int	main(int argc, char *argv[])
 	t_point		**points;
 	t_coord		map_size;
 
+	atexit(leakss);
 	if (argc != 2)
 		return (33);
 	raw_map = NULL;
