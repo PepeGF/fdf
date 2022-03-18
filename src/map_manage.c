@@ -43,7 +43,7 @@ int	ft_map_length(char *line)
 	return (length);
 }
 
-void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size)
+void	ft_map_int_array(t_list *raw_map, t_point **points)
 {
 	char	**splited;
 	t_list	*aux;
@@ -56,7 +56,7 @@ void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size)
 	{
 		splited = ft_split(aux->content, ' ');
 		j = 0;
-		while (j < map_size.x)
+		while (splited[j])
 		{
 			points[i][j].x = j;
 			points[i][j].y = i;
@@ -65,8 +65,6 @@ void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size)
 			free(splited[j]);
 			j++;
 		}
-		if (splited[j])
-			free(splited[j]);
 		free(splited);
 		printf("\n");
 		i++;
