@@ -25,7 +25,7 @@ SRCS = main.c map_manage.c map_free.c
 OBJS = $(SRCS:%.c=bin/%.o)
 
 CC = gcc
-CFLAGS =-Wall -Werror -Wextra -g -O0 
+CFLAGS =-Wall -Werror -Wextra -g -O0
 RM = rm -f
 
 
@@ -55,7 +55,7 @@ $(NAME): $(OBJS)
 	@echo $(PURPLE)"[Creating libft]"$(BLUE)
 	@$(MAKE) -C $(LIBFT_PATH) --silent
 	@echo $(PURPLE)"[Creating fdf]"$(BLUE)
-	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL)
+	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) -fsanitize=address
 	@echo $(GREEN)"$(NAME): ready to be executed"
 
 clean:

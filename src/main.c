@@ -15,7 +15,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_lenght + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-	write(1, "WOLOLO\n", 7);
 }
 
 
@@ -28,6 +27,7 @@ int	main(int argc, char *argv[])
 	t_point		**points;
 	t_coord		map_size;
 	t_data		data;
+	int	i = 0;
 
 	//atexit(leakss);
 	if (argc != 2)
@@ -41,14 +41,18 @@ int	main(int argc, char *argv[])
 	ft_map_raw_free(raw_map);
 
 	data.mlx_ptr = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx_ptr, 1920, 1080, "Wololo!");
-	data.img = mlx_new_image(data.mlx_ptr, 1920, 1080);
+	data.mlx_win = mlx_new_window(data.mlx_ptr, 1220, 750, "Wololo!");
+	data.img = mlx_new_image(data.mlx_ptr, 1220, 750);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_lenght, &data.endian);
-	printf("-----%d , %d , %d ------\n",data.bits_per_pixel, data.line_lenght, data.endian);
-	my_mlx_pixel_put(data.img, 5, 5, 0x00FF0000);
+	//printf("-----%d , %d , %d ------\n",data.bits_per_pixel, data.line_lenght, data.endian);
+	while (i < 920)
+	{
+	my_mlx_pixel_put(&data, i, 40, 0x00FF0000);
+	i++;
+	}
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.img, 0, 0);
 	//sleep(5);
-	system("leaks fdf");
+	//system("leaks fdf");
 	mlx_loop(data.mlx_ptr);
 
 	ft_map_free_array(points, map_size);
