@@ -61,12 +61,12 @@ void	ft_map_int_array(t_list *raw_map, t_point **points)
 			points[i][j].x = j;
 			points[i][j].y = i;
 			points[i][j].z = ft_atoi(splited[j]);
-			printf("%d|%d|%d ", points[i][j].x, points[i][j].y, points[i][j].z);
+//			printf("%d|%d|%d ", points[i][j].x, points[i][j].y, points[i][j].z);
 			free(splited[j]);
 			j++;
 		}
 		free(splited);
-		printf("\n");
+//		printf("\n");
 		i++;
 		aux = aux->next;
 	}

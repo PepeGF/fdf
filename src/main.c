@@ -17,9 +17,39 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+int	key_hook(int keycode, t_data *data)
+{
+	(void)data;
+	if (keycode == 53)
+	{
+		write(1, "Bye bye!\n", 9);
+		exit(0);
+	}
+	else
+		return (0);
+}
 
+void	ft_convert_points(t_point **points, t_coord map_size)
+{
+	int	i;
+	int	j;
 
-
+	i = 0;
+	while (i < map_size.y)
+	{
+		j = 0;
+		while (j < map_size.x)
+		{
+			points[i][j].x = cos(M_PI_2 / 3) * points[i][j].x - cos(M_PI_2 / 3) * points[i][j].y + 1220/2;
+			points[i][j].y = ;
+			printf("%d|%d|%d ",points[i][j].x, points[i][j].y, points[i][j].z);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	return ;
+}
 
 int	main(int argc, char *argv[])
 {
@@ -27,9 +57,10 @@ int	main(int argc, char *argv[])
 	t_point		**points;
 	t_coord		map_size;
 	t_data		data;
-	int	i = 0;
+	//int	i = 0;
 
-	//atexit(leakss);
+
+//	atexit(leakss);
 	if (argc != 2)
 		return (33);
 	raw_map = NULL;
@@ -39,18 +70,15 @@ int	main(int argc, char *argv[])
 	ft_map_create_array(&points, map_size);
 	ft_map_int_array(raw_map, points);
 	ft_map_raw_free(raw_map);
+	ft_convert_points(points, map_size);
 
 	data.mlx_ptr = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_ptr, 1220, 750, "Wololo!");
 	data.img = mlx_new_image(data.mlx_ptr, 1220, 750);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_lenght, &data.endian);
-	//printf("-----%d , %d , %d ------\n",data.bits_per_pixel, data.line_lenght, data.endian);
-	while (i < 920)
-	{
-	my_mlx_pixel_put(&data, i, 40, 0x00FF0000);
-	i++;
-	}
+	my_mlx_pixel_put(&data, 1220/2, 750/2, 0x00FFFFFF);
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.img, 0, 0);
+	mlx_key_hook(data.mlx_win, &key_hook, &data);
 	//sleep(5);
 	//system("leaks fdf");
 	mlx_loop(data.mlx_ptr);
