@@ -56,7 +56,7 @@ $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT_PATH) --silent
 	@echo $(PURPLE)"[Creating fdf]"$(BLUE)
 	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) #-fsanitize=address
-	@echo $(GREEN)"$(NAME): ready to be executed"
+	@echo $(GREEN)"$(NAME): ready to be executed"$(WHITE)
 
 clean:
 	@$(RM) $(OBJS)

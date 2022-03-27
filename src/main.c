@@ -26,7 +26,7 @@ int	key_hook(int keycode, t_data *data)
 		mlx_clear_window(data->mlx_ptr, data->mlx_win);
 		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
 		write(1, "Bye bye!\n", 9);
-		return (0);
+		exit (0);
 	}
 	else
 		return (0);
@@ -46,11 +46,11 @@ void	ft_convert_points(t_point **points, t_coord map_size)
 		j = 0;
 		while (j < map_size.x)
 		{
-			x_aux = points[i][j].x + points[i][j].y;
-			y_aux = (points[i][j].x - points[i][j].y) / 2 + points[i][j].z;
-			points[i][j].x = x_aux + 1220 / 2;
-			points[i][j].y = -y_aux + 750 / 2;
-		//printf("%d|%d|%d ",points[i][j].x, points[i][j].y, points[i][j].z);
+			x_aux = sqrt(400/2) * (points[i][j].x - points[i][j].y);
+			y_aux = sqrt(400/6) * (points[i][j].x + points[i][j].y - 2* points[i][j].z);
+			points[i][j].x = x_aux  + 1220 / 2;
+			points[i][j].y = y_aux  + 750 / 2;
+	//	printf("%d|%d ",points[i][j].x-1220/2, points[i][j].y-750/2);
 			j++;
 		}
 	//	printf("\n");
@@ -72,7 +72,7 @@ void	ft_draw_line(t_point **points, t_data *data, t_coord map_size)
 		j = 0;
 		while (j < map_size.x)
 		{
-			my_mlx_pixel_put(data, points[i][j].x, points[i][j].y, 0x00FF0000);
+			my_mlx_pixel_put(data, points[i][j].x, points[i][j].y, 0x00FFFFFF);
 			j++;
 		}
 		i++;
