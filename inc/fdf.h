@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/03/25 17:55:16 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/03/31 19:46:52 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ typedef struct s_data
 	int		line_lenght;
 	int		endian;
 	int		offset;
-	int		map_x;
-	int		map_y;
+	int		map_center_x;
+	int		map_center_y;
+	int		map_dimension_x;
+	int		map_dimension_y;
+	int		scale;
 }	t_data;
 
 /* Estructura para almacenar colores */
@@ -68,12 +71,6 @@ typedef struct s_point
 	unsigned int		color;
 }	t_point;
 
-/* Estructura para ventanas, pero no me acuerdo */
-typedef struct s_vars
-{
-	void	*mlx;
-	void	*win;
-}	t_vars;
 
 /* Manage map functions*/
 void	ft_map_read(t_list **raw_map, char *file);
