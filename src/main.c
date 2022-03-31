@@ -9,6 +9,25 @@ void	leakss()
 	system ("leaks fdf");
 }
 
+void	ft_print_points(t_point **points, t_coord map_size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	printf("Tamaño mapa: %dx%d\n", map_size.y, map_size.x);
+	while (i < map_size.y)
+	{
+		j = 0;
+		while(j < map_size.x)
+		{
+			printf("%d|%d ",points[i][j].x, points[i][j].y);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -34,9 +53,8 @@ int	key_hook(int keycode, t_data *data)
 
 void	ft_convert_points(t_point **points, t_coord map_size)
 {
-	int	x_aux;
-	int	y_aux;
-	//int	z_aux;
+	double	x_aux;
+	double	y_aux;
 	int	i;
 	int	j;
 
@@ -46,14 +64,12 @@ void	ft_convert_points(t_point **points, t_coord map_size)
 		j = 0;
 		while (j < map_size.x)
 		{
-			x_aux = sqrt(400/2) * (points[i][j].x - points[i][j].y);
-			y_aux = sqrt(400/6) * (points[i][j].x + points[i][j].y - 2* points[i][j].z);
-			points[i][j].x = x_aux  + 1220 / 2;
-			points[i][j].y = y_aux  + 750 / 2;
-	//	printf("%d|%d ",points[i][j].x-1220/2, points[i][j].y-750/2);
+			x_aux = sqrt(1.0/2) * (points[i][j].x - points[i][j].y);
+			y_aux = sqrt(1.0/6) * (points[i][j].x + points[i][j].y - 2* points[i][j].z);
+			points[i][j].x = x_aux;
+			points[i][j].y = y_aux;
 			j++;
 		}
-	//	printf("\n");
 		i++;
 	}
 	return ;
@@ -72,7 +88,7 @@ void	ft_draw_line(t_point **points, t_data *data, t_coord map_size)
 		j = 0;
 		while (j < map_size.x)
 		{
-			my_mlx_pixel_put(data, points[i][j].x, points[i][j].y, 0x00FFFFFF);
+			my_mlx_pixel_put(data, 20 * points[i][j].x + 1220/2,20* points[i][j].y +750/2, 0x00FFFFFF);
 			j++;
 		}
 		i++;
@@ -99,8 +115,10 @@ int	main(int argc, char *argv[])
 	ft_map_create_array(&points, map_size);
 	ft_map_int_array(raw_map, points);
 	ft_map_raw_free(raw_map);
+	ft_print_points(points, map_size);
 	ft_convert_points(points, map_size);
-	
+	ft_print_points(points, map_size);
+
 	data.mlx_ptr = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_ptr, 1220, 750, "Wololo!");
 	data.img = mlx_new_image(data.mlx_ptr, 1220, 750);
