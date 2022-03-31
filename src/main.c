@@ -157,18 +157,18 @@ void	ft_map_middle_y(t_point **points, t_coord map_size, t_data *data)
 
 void	ft_get_scale(t_data *data)
 {
-	int	vertical_scale;
-	int	horizontal_scale;
+	double vertical_scale;
+	double	horizontal_scale;
 
-	vertical_scale = WIN_HEIGHT / data->map_dimension_y;
-	horizontal_scale = WIN_WIDTH / data->map_dimension_x;
+	vertical_scale = (WIN_HEIGHT - 0.0) / data->map_dimension_y;
+	horizontal_scale = (WIN_WIDTH - 0.0) / data->map_dimension_x;
 	if (vertical_scale > horizontal_scale)
 		data->scale = horizontal_scale;
 	else
 		data->scale = vertical_scale;
 	printf("Mapa dibujado X: %d\nMapa dibujado Y: %d\n", data->map_dimension_x,data->map_dimension_y);
-	printf("Escala vertical: %d\nEscala Horizontal: %d\n", vertical_scale, horizontal_scale);
-	printf("Escala global: %d\n", data->scale);
+	printf("Escala vertical: %f\nEscala Horizontal: %f\n", vertical_scale, horizontal_scale);
+	printf("Escala global: %f\n", data->scale);
 }
 
 int	main(int argc, char *argv[])

@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/03/31 19:46:52 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/03/31 20:04:30 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_data
 	int		map_center_y;
 	int		map_dimension_x;
 	int		map_dimension_y;
-	int		scale;
+	double	scale;
 }	t_data;
 
 /* Estructura para almacenar colores */
