@@ -1,8 +1,8 @@
 #include "../inc/fdf.h"
 
 #define MLX_ERROR 1
-#define WIN_WIDTH 1220
-#define WIN_HEIGHT 750
+#define WIN_WIDTH 2000
+#define WIN_HEIGHT 1200
 
 void	leakss()
 {
@@ -66,7 +66,7 @@ void	ft_convert_points(t_point **points, t_coord map_size)
 		while (j < map_size.x)
 		{
 			x_aux = sqrt(1.0/2) * (points[i][j].x - points[i][j].y);
-			y_aux = sqrt(1.0/6) * (points[i][j].x + points[i][j].y - 2* points[i][j].z);
+			y_aux = sqrt(1.0/6) * (points[i][j].x + points[i][j].y - 2 * points[i][j].z);
 			points[i][j].x = x_aux;
 			points[i][j].y = y_aux;
 			j++;
@@ -91,7 +91,7 @@ void	ft_draw_line(t_point **points, t_data *data, t_coord map_size)
 		{
 			x = points[i][j].x;
 			y = points[i][j].y;
-			my_mlx_pixel_put(data, data->scale * 0.9 * (x - data->map_center_x) + 1220/2  , data->scale * 0.9 * (y - data->map_center_y) +750/2 , 0x00FFFFFF);
+			my_mlx_pixel_put(data, data->scale * 0.9 * (x - data->map_center_x) + WIN_WIDTH/2  , data->scale * 0.9 * (y - data->map_center_y) + WIN_HEIGHT/2 , 0x00FFFFFF);
 			j++;
 		}
 		i++;
@@ -191,16 +191,16 @@ int	main(int argc, char *argv[])
 	ft_map_create_array(&points, map_size);
 	ft_map_int_array(raw_map, points);
 	ft_map_raw_free(raw_map);
-	ft_print_points(points, map_size);
+//	ft_print_points(points, map_size);
 	ft_convert_points(points, map_size);
-	ft_print_points(points, map_size);
+//	ft_print_points(points, map_size);
 	ft_map_middle_x(points, map_size, &data);
 	ft_map_middle_y(points, map_size, &data);
 	ft_get_scale(&data);
 
 	data.mlx_ptr = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx_ptr, 1220, 750, "Wololo!");
-	data.img = mlx_new_image(data.mlx_ptr, 1220, 750);
+	data.mlx_win = mlx_new_window(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Wololo!");
+	data.img = mlx_new_image(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_lenght, &data.endian);
 	ft_draw_line(points, &data, map_size);
