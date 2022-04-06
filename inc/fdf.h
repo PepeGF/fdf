@@ -6,12 +6,18 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/03/31 20:04:30 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:40:42 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+# define MLX_ERROR 1
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 750
+//#define WIN_WIDTH 2000
+//#define WIN_HEIGHT 1200
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -71,6 +77,16 @@ typedef struct s_point
 	unsigned int		color;
 }	t_point;
 
+typedef struct s_bresenham
+{
+	int	x;
+	int	y;
+	int	dx;
+	int	dy;
+	int	p;
+	int	m;
+}	t_bresen;
+
 
 /* Manage map functions*/
 void	ft_map_read(t_list **raw_map, char *file);
@@ -79,5 +95,19 @@ void	ft_map_int_array(t_list *raw_map, t_point **points);
 int		ft_map_length(char *line);
 void	ft_map_free_array(t_point **points, t_coord map_size);
 void	ft_map_create_array(t_point ***points, t_coord map_size);
+
+/* PENDIENTE DE CLASIFICACIÓN */
+/* Funciones testadas y operativas */
+
+void	ft_print_points(t_point **points, t_coord map_size);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		key_hook(int keycode, t_data *data);
+void	ft_convert_points(t_point **points, t_coord map_size);
+void	ft_draw_vertex(t_point **points, t_data *data, t_coord map_size);
+void	ft_map_middle_x(t_point **points, t_coord map_size, t_data *data);
+void	ft_map_middle_y(t_point **points, t_coord map_size, t_data *data);
+void	ft_get_scale(t_data *data);
+
+
 
 #endif 

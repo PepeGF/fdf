@@ -20,7 +20,7 @@ LIBGNL_PATH = gnl/
 LIBFT_PATH = libft/
 
 
-SRCS = main.c map_manage.c map_free.c
+SRCS = main.c map_manage.c map_free.c functions.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 
