@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/06 19:40:42 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/07 20:28:50 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void	ft_map_middle_x(t_point **points, t_coord map_size, t_data *data);
 void	ft_map_middle_y(t_point **points, t_coord map_size, t_data *data);
 void	ft_get_scale(t_data *data);
 
+void	ft_bresen_neg_low(t_data *data, t_point point0, t_point point1);
+void	ft_bresen_pos_low(t_data *data, t_point point0, t_point point1);
 
 
 #endif 
