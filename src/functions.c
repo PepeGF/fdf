@@ -169,3 +169,57 @@ void	ft_get_scale(t_data *data)
 //	printf("Escala vertical: %f\nEscala Horizontal: %f\n", vertical_scale, horizontal_scale);
 //	printf("Escala global: %f\n", data->scale);
 }
+
+void	ft_bresen_pos_low(t_data *data, t_point point0, t_point point1)
+{
+	int	d[3];
+	int coord[2];
+
+	d[0] = point1.x - point0.x;
+	d[1] = point1.y - point0.y;
+	coord[0] = point0.x;
+	coord[1] = point0.y;
+	d[2] = 2 * d[1] - d[0];
+	while (coord[0] < point1.x)
+	{
+		if (d[2] >= 0)
+		{
+			my_mlx_pixel_put(data, coord[0], coord[1], 0x00FFFFFF);
+			coord[1]++;
+			d[2] = d[2] + 2 * d[1] - 2 * d[0];
+		}
+		else
+		{
+			my_mlx_pixel_put(data, coord[0], coord[1], 0x00FFFFFF);
+			d[2] = d[2] + 2 * d[1];
+		}
+		coord[0]++;
+	}
+}
+
+void	ft_bresen_neg_low(t_data *data, t_point point0, t_point point1)
+{
+	int	d[3];
+	int coord[2];
+
+	d[0] = point1.x - point0.x;
+	d[1] = point1.y - point0.y;
+	coord[0] = point0.x;
+	coord[1] = point0.y;
+	d[2] = 2 * d[1] - d[0];
+	while (coord[0] < point1.x)
+	{
+		if (d[2] >= 0)
+		{
+			my_mlx_pixel_put(data, coord[0], coord[1], 0x00FFFFFF);
+			coord[1]--;
+			d[2] = d[2] - 2 * d[1] - 2 * d[0];
+		}
+		else
+		{
+			my_mlx_pixel_put(data, coord[0], coord[1], 0x00FFFFFF);
+			d[2] = d[2] - 2 * d[1];
+		}
+		coord[0]++;
+	}
+}

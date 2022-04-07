@@ -32,7 +32,7 @@ void ft_decide_v_h(t_point **points, t_data *data, t_coord map_size)
 }
 */
 
-void	ft_bresen_pos_low(t_data *data, t_point point0, t_point point1)
+void	ft_bresen_pos_high(t_data *data, t_point point0, t_point point1)
 {
 	int	d[3];
 	int coord[2];
@@ -41,51 +41,23 @@ void	ft_bresen_pos_low(t_data *data, t_point point0, t_point point1)
 	d[1] = point1.y - point0.y;
 	coord[0] = point0.x;
 	coord[1] = point0.y;
-	d[2] = 2 * d[1] - d[0];
-	while (coord[0] < point1.x)
+	d[2] = 2 * d[0] - d[1];
+	while (coord[1] < point1.y)
 	{
 		if (d[2] >= 0)
 		{
 			my_mlx_pixel_put(data, coord[0], coord[1], 0x00FFFFFF);
-			coord[1]++;
-			d[2] = d[2] + 2 * d[1] - 2 * d[0];
+			coord[0]++;
+			d[2] = d[2] + 2 * d[0] - 2 * d[1];
 		}
 		else
 		{
 			my_mlx_pixel_put(data, coord[0], coord[1], 0x00FFFFFF);
-			d[2] = d[2] + 2 * d[1];
+			d[2] = d[2] + 2 * d[0];
 		}
-		coord[0]++;
+		coord[1]++;
 	}
 }
-
-void	ft_bresen_neg_low(t_data *data, t_point point0, t_point point1)
-{
-	int	d[3];
-	int coord[2];
-
-	d[0] = point1.x - point0.x;
-	d[1] = point1.y - point0.y;
-	coord[0] = point0.x;
-	coord[1] = point0.y;
-	d[2] = 2 * d[1] - d[0];
-	while (coord[0] < point1.x)
-	{
-		if (d[2] >= 0)
-		{
-			my_mlx_pixel_put(data, coord[0], coord[1], 0x00FFFFFF);
-			coord[1]--;
-			d[2] = d[2] - 2 * d[1] - 2 * d[0];
-		}
-		else
-		{
-			my_mlx_pixel_put(data, coord[0], coord[1], 0x00FFFFFF);
-			d[2] = d[2] - 2 * d[1];
-		}
-		coord[0]++;
-	}
-}
-
 
 int	main(int argc, char *argv[])
 {
@@ -115,13 +87,15 @@ int	main(int argc, char *argv[])
 	data.img = mlx_new_image(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_lenght, &data.endian);
+	
 	points[0][0].x = 10;
 	points[0][0].y = 500;
-	points[1][1].x = 500 * 2;
-	points[1][1].y = 400;
-	ft_bresen_neg_low(&data, points[0][0], points[1][1]);
+	points[1][1].x = 100;
+	points[1][1].y = 10;
+	ft_bresen_pos_high(&data, points[0][0], points[1][1]);
 	my_mlx_pixel_put(&data, points[0][0].x, points[0][0].y, 0xff0000);
 	my_mlx_pixel_put(&data, points[1][1].x, points[1][1].y, 0xff0000);
+
 	//system ("leaks fdf");
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.img, 0, 0);
 	mlx_key_hook(data.mlx_win, &key_hook, &data);
