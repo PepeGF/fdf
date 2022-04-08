@@ -32,32 +32,6 @@ void ft_decide_v_h(t_point **points, t_data *data, t_coord map_size)
 }
 */
 
-void	ft_bresen_pos_high(t_data *data, t_point point0, t_point point1)
-{
-	int	d[3];
-	int coord[2];
-
-	d[0] = point1.x - point0.x;
-	d[1] = point1.y - point0.y;
-	coord[0] = point0.x;
-	coord[1] = point0.y;
-	d[2] = 2 * d[0] - d[1];
-	while (coord[1] < point1.y)
-	{
-		if (d[2] >= 0)
-		{
-			my_mlx_pixel_put(data, coord[0], coord[1], 0x00FFFFFF);
-			coord[0]++;
-			d[2] = d[2] + 2 * d[0] - 2 * d[1];
-		}
-		else
-		{
-			my_mlx_pixel_put(data, coord[0], coord[1], 0x00FFFFFF);
-			d[2] = d[2] + 2 * d[0];
-		}
-		coord[1]++;
-	}
-}
 
 int	main(int argc, char *argv[])
 {
@@ -88,13 +62,41 @@ int	main(int argc, char *argv[])
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_lenght, &data.endian);
 	
-	points[0][0].x = 10;
-	points[0][0].y = 500;
-	points[1][1].x = 100;
-	points[1][1].y = 10;
-	ft_bresen_pos_high(&data, points[0][0], points[1][1]);
+	points[0][0].x = WIN_WIDTH / 2;
+	points[0][0].y = WIN_HEIGHT / 2;
+	points[1][1].x = WIN_WIDTH / 2 + 100;
+	points[1][1].y = 100;
+	points[2][2].x = WIN_WIDTH - 100;
+	points[2][2].y = WIN_HEIGHT / 2 - 100;
+	points[3][3].x = WIN_WIDTH - 100;
+	points[3][3].y = WIN_HEIGHT / 2 + 100;
+	points[4][4].x = WIN_WIDTH / 2 + 100;
+	points[4][4].y = WIN_HEIGHT - 100;
+	points[5][5].x = WIN_WIDTH / 2 - 100;
+	points[5][5].y = 100;
+	points[6][6].x = 100;
+	points[6][6].y = WIN_HEIGHT / 2 - 100;
+	points[7][7].x = 100;
+	points[7][7].y = WIN_HEIGHT / 2 + 100;
+	points[8][8].x = WIN_WIDTH / 2 - 100;
+	points[8][8].y = WIN_HEIGHT - 100;
+	ft_decide_line(&data, points[0][0], points[1][1]);
+	ft_decide_line(&data, points[0][0], points[2][2]);
+	ft_decide_line(&data, points[0][0], points[3][3]);
+	ft_decide_line(&data, points[0][0], points[4][4]);
+	ft_decide_line(&data, points[0][0], points[5][5]);
+	ft_decide_line(&data, points[0][0], points[6][6]);
+	ft_decide_line(&data, points[0][0], points[7][7]);
+	ft_decide_line(&data, points[0][0], points[8][8]);
 	my_mlx_pixel_put(&data, points[0][0].x, points[0][0].y, 0xff0000);
 	my_mlx_pixel_put(&data, points[1][1].x, points[1][1].y, 0xff0000);
+	my_mlx_pixel_put(&data, points[2][2].x, points[2][2].y, 0xff0000);
+	my_mlx_pixel_put(&data, points[3][3].x, points[3][3].y, 0xff0000);
+	my_mlx_pixel_put(&data, points[4][4].x, points[4][4].y, 0xff0000);
+	my_mlx_pixel_put(&data, points[5][5].x, points[5][5].y, 0xff0000);
+	my_mlx_pixel_put(&data, points[6][6].x, points[6][6].y, 0xff0000);
+	my_mlx_pixel_put(&data, points[7][7].x, points[7][7].y, 0xff0000);
+	my_mlx_pixel_put(&data, points[8][8].x, points[8][8].y, 0xff0000);
 
 	//system ("leaks fdf");
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.img, 0, 0);
