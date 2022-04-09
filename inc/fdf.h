@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/08 21:49:56 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/09 13:36:00 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ typedef struct s_coord
 /* Estructura para listas de puntos con coordenadas y color */
 typedef struct s_point
 {
-	int					x;
-	int					y;
-	int					z;
-	int					x_mod;
-	int					y_mod;
-	int					z_mod;
-	unsigned int		color;
+	int			x;
+	int			y;
+	int			z;
+	int			x_mod;
+	int			y_mod;
+	int			z_mod;
+	unsigned int	color;
 }	t_point;
 
 typedef struct s_bresenham
@@ -105,7 +105,8 @@ void	ft_map_create_array(t_point ***points, t_coord map_size);
 void	ft_print_points(t_point **points, t_coord map_size);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		key_hook(int keycode, t_data *data);
-void	ft_convert_points(t_point **points, t_coord map_size);
+void	ft_convert_points_2d(t_point **points, t_coord map_size);
+void	ft_adapt_points_to_screen(t_point **points, t_data *data, t_coord map_size);
 void	ft_draw_vertex(t_point **points, t_data *data, t_coord map_size);
 void	ft_map_middle_x(t_point **points, t_coord map_size, t_data *data);
 void	ft_map_middle_y(t_point **points, t_coord map_size, t_data *data);

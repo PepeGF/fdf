@@ -20,7 +20,8 @@ LIBGNL_PATH = gnl/
 LIBFT_PATH = libft/
 
 
-SRCS = main.c map_manage.c map_free.c functions.c
+SRCS = main.c map_manage.c map_free.c functions.c bresenham.c triangulation.c \
+		screen_adaptation.c points_manipulation.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 
@@ -55,7 +56,7 @@ $(NAME): $(OBJS)
 	@echo $(PURPLE)"[Creating libft]"$(BLUE)
 	@$(MAKE) -C $(LIBFT_PATH) --silent
 	@echo $(PURPLE)"[Creating fdf]"$(BLUE)
-	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) #-fsanitize=address
+	@$(CC) -o $(NAME) $(OBJS) $(LIB_COMPIL) -fsanitize=address
 	@echo $(GREEN)"$(NAME): ready to be executed"$(WHITE)
 
 clean:

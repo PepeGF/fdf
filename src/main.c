@@ -12,10 +12,11 @@ int	main(int argc, char *argv[])
 	t_coord		map_size;
 	t_data		data;
 
-	atexit(leakss);
+// atexit(leakss);
 	if (argc != 2)
 		return (33);
 	raw_map = NULL;
+	printf("%d\t%d\n", WIN_WIDTH*1, WIN_HEIGHT*1);
 	//funcion para inicializar data en cero???
 	ft_map_read(&raw_map, argv[1]);
 	map_size.x = ft_map_length(raw_map->content);
@@ -23,16 +24,21 @@ int	main(int argc, char *argv[])
 	ft_map_create_array(&points, map_size);
 	ft_map_int_array(raw_map, points);
 	ft_map_raw_free(raw_map);
-	ft_convert_points(points, map_size);
+	ft_convert_points_2d(points, map_size);
+
 	ft_map_middle_x(points, map_size, &data);
 	ft_map_middle_y(points, map_size, &data);
 	ft_get_scale(&data);
+
 
 	data.mlx_ptr = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FDF");
 	data.img = mlx_new_image(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_lenght, &data.endian);
+	
+	ft_adapt_points_to_screen(points, &data, map_size);
+	ft_print_points(points, map_size);
 	ft_triangle(&data, points, map_size);
 	ft_draw_vertex(points, &data, map_size);
 	//system ("leaks fdf");
