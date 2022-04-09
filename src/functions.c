@@ -12,7 +12,7 @@ void	ft_print_points(t_point **points, t_coord map_size)
 		j = 0;
 		while(j < map_size.x)
 		{
-			printf("%d|%d ",points[i][j].x, points[i][j].y);
+			printf("%d|%d ",points[i][j].x_mod, points[i][j].y_mod);
 			//printf("%d ", points[i][j].y);
 			j++;
 		}
@@ -88,10 +88,13 @@ void	ft_draw_vertex(t_point **points, t_data *data, t_coord map_size)
 		j = 0;
 		while (j < map_size.x)
 		{
-			x = data->scale * 0.9 * (points[i][j].x - data->map_center_x) + WIN_WIDTH/2;
+/*			x = data->scale * 0.9 * (points[i][j].x - data->map_center_x) + WIN_WIDTH/2;
 			y = data->scale * 0.9 * (points[i][j].y - data->map_center_y) + WIN_HEIGHT/2;
+*/
+			x = points[i][j].x_mod;
+			y = points[i][j].y_mod;
 			if (x > 0 && x < WIN_WIDTH && y > 0 && y < WIN_HEIGHT)
-			my_mlx_pixel_put(data, x, y, 0x00FFFFFF);
+			my_mlx_pixel_put(data, x, y, 0x00FF0000);
 			j++;
 		}
 		i++;
@@ -124,7 +127,6 @@ void	ft_map_middle_x(t_point **points, t_coord map_size, t_data *data)
 	}
 	data->map_center_x = (x_max + x_min) / 2.0;
 	data->map_dimension_x = x_max - x_min;
-//	printf("x_max:%f x_min:%f\n", x_max, x_min);
 }
 
 void	ft_map_middle_y(t_point **points, t_coord map_size, t_data *data)
@@ -175,12 +177,12 @@ void	ft_bresen_pos_low(t_data *data, t_point point0, t_point point1)
 	int	d[3];
 	int coord[2];
 
-	d[0] = point1.x - point0.x;
-	d[1] = point1.y - point0.y;
-	coord[0] = point0.x;
-	coord[1] = point0.y;
+	d[0] = point1.x_mod - point0.x_mod;
+	d[1] = point1.y_mod - point0.y_mod;
+	coord[0] = point0.x_mod;
+	coord[1] = point0.y_mod;
 	d[2] = 2 * d[1] - d[0];
-	while (coord[0] < point1.x)
+	while (coord[0] < point1.x_mod)
 	{
 		if (d[2] >= 0)
 		{
@@ -202,12 +204,12 @@ void	ft_bresen_pos_high(t_data *data, t_point point0, t_point point1)
 	int	d[3];
 	int coord[2];
 
-	d[0] = point1.x - point0.x;
-	d[1] = point1.y - point0.y;
-	coord[0] = point0.x;
-	coord[1] = point0.y;
+	d[0] = point1.x_mod - point0.x_mod;
+	d[1] = point1.y_mod - point0.y_mod;
+	coord[0] = point0.x_mod;
+	coord[1] = point0.y_mod;
 	d[2] = 2 * d[0] - d[1];
-	while (coord[1] < point1.y)
+	while (coord[1] < point1.y_mod)
 	{
 		if (d[2] >= 0)
 		{
@@ -229,12 +231,12 @@ void	ft_bresen_neg_low(t_data *data, t_point point0, t_point point1)
 	int	d[3];
 	int coord[2];
 
-	d[0] = point1.x - point0.x;
-	d[1] = point1.y - point0.y;
-	coord[0] = point0.x;
-	coord[1] = point0.y;
+	d[0] = point1.x_mod - point0.x_mod;
+	d[1] = point1.y_mod - point0.y_mod;
+	coord[0] = point0.x_mod;
+	coord[1] = point0.y_mod;
 	d[2] = 2 * d[1] - d[0];
-	while (coord[0] < point1.x)
+	while (coord[0] < point1.x_mod)
 	{
 		if (d[2] >= 0)
 		{
@@ -256,12 +258,12 @@ void	ft_bresen_neg_high(t_data *data, t_point point0, t_point point1)
 	int	d[3];
 	int coord[2];
 
-	d[0] = point1.x - point0.x;
-	d[1] = point1.y - point0.y;
-	coord[0] = point1.x;
-	coord[1] = point1.y;
+	d[0] = point1.x_mod - point0.x_mod;
+	d[1] = point1.y_mod - point0.y_mod;
+	coord[0] = point1.x_mod;
+	coord[1] = point1.y_mod;
 	d[2] = 2 * d[1] - d[0];
-	while (coord[1] < point0.y)
+	while (coord[1] < point0.y_mod)
 	{
 		if (d[2] >= 0)
 		{
@@ -315,4 +317,27 @@ void	ft_decide_line(t_data *data, t_point point0, t_point point1)
 		ft_bresen_pos_low(data, point0, point1);
 	else if (dy > 0 && dd < 0)
 		ft_bresen_pos_high(data, point0, point1);
+}
+
+void	ft_triangle(t_data *data, t_point **points, t_coord map_size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < map_size.y - 1)
+	{
+		j = 0;
+		while (j < map_size.x - 1)
+		{
+			points[i][j].x_mod = data->scale * 0.9 * (points[i][j].x - data->
+					map_center_x) + WIN_WIDTH / 2;
+			points[i][j].y_mod = data->scale * 0.9 * (points[i][j].y - data->
+					map_center_y) + WIN_HEIGHT / 2;
+			ft_decide_line(data, points[i][j], points[i + 1][j + 1]);
+			j++;
+		}
+		i++;
+	}
 }

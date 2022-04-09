@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/08 19:24:28 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/08 21:49:56 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ typedef struct s_point
 	int					x;
 	int					y;
 	int					z;
+	int					x_mod;
+	int					y_mod;
+	int					z_mod;
 	unsigned int		color;
 }	t_point;
 
@@ -113,5 +116,6 @@ void	ft_bresen_pos_low(t_data *data, t_point point0, t_point point1);
 void	ft_bresen_pos_high(t_data *data, t_point point0, t_point point1);
 void	ft_bresen_neg_high(t_data *data, t_point point0, t_point point1);
 void	ft_decide_line(t_data *data, t_point point0, t_point point1);
+void	ft_triangle(t_data *data, t_point **points, t_coord map_size);
 
 #endif 
