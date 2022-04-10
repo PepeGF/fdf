@@ -16,4 +16,5 @@ int	key_hook(int keycode, t_data *data)
 		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
 		exit (0);
 	}
+	return (0);
 }

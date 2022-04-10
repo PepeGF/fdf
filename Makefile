@@ -20,8 +20,8 @@ LIBGNL_PATH = gnl/
 LIBFT_PATH = libft/
 
 
-SRCS = main.c map_manage.c map_free.c functions.c bresenham.c triangulation.c \
-		screen_adaptation.c points_manipulation.c
+SRCS = main.c map_manage.c map_free.c mlx_added_functions.c bresenham.c triangulation.c \
+		screen_adaptation.c points_manipulation.c error_manage.c program_flow.c
 
 OBJS = $(SRCS:%.c=bin/%.o)
 

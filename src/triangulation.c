@@ -1,6 +1,6 @@
 #include "../inc/fdf.h"
 
-void	ft_swap_points(t_data *data, t_point *point0, t_point *point1)
+static void	ft_swap_points(t_data *data, t_point *point0, t_point *point1)
 {
 	t_point	aux;
 
