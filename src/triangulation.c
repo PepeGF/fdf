@@ -46,17 +46,23 @@ void	ft_triangle(t_data *data, t_point **points, t_coord map_size)
 	int	j;
 (void)map_size;
 	i = 0;
-	while (i < map_size.y - 1)
+	while (i < map_size.y )
 	{
 		j = 0;
-		while (j < map_size.x - 1)
+		while (j < map_size.x)
 		{
+			if (i != map_size.y - 1 && j != map_size.x - 1)
+			{
 			ft_decide_line(data, points[i][j], points[i + 1][j]);
 			ft_decide_line(data, points[i][j], points[i][j + 1]);
 			ft_decide_line(data, points[i][j], points[i + 1][j + 1]);
+			}
+			else if (i == map_size.y - 1 && j != map_size.x - 1)
+				ft_decide_line(data, points[i][j], points[i][j + 1]);
+			else if (j == map_size.x - 1 && i != map_size.y - 1)
+				ft_decide_line(data, points[i][j], points[i + 1][j]);
 			j++;
 		}
 		i++;
 	}
-	
 }

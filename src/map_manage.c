@@ -43,13 +43,13 @@ int	ft_map_length(char *line)
 	return (length);
 }
 
-void	ft_map_int_array(t_list *raw_map, t_point **points)
+void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size)
 {
 	char	**splited;
 	t_list	*aux;
 	int		j;
 	int		i;
-
+(void)map_size;
 	aux = raw_map;
 	i = 0;
 	while (aux)

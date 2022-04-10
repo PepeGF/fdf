@@ -41,7 +41,7 @@ void	ft_convert_points_2d(t_point **points, t_coord map_size)
 	double	y_aux;
 	int	i;
 	int	j;
-(void)y_aux;
+
 	i = 0;
 	while (i < map_size.y)
 	{
@@ -50,8 +50,8 @@ void	ft_convert_points_2d(t_point **points, t_coord map_size)
 		{
 			x_aux = sqrt(1.0/2) * (points[i][j].x - points[i][j].y);
 			y_aux = sqrt(1.0/6) * (points[i][j].x + points[i][j].y - 2 * points[i][j].z);
-			points[i][j].x = x_aux * 1000;
-			points[i][j].y = y_aux * 1000;
+			points[i][j].x = x_aux * 200;
+			points[i][j].y = y_aux * 200;
 			j++;
 		}
 		i++;
@@ -60,7 +60,7 @@ void	ft_convert_points_2d(t_point **points, t_coord map_size)
 	return ;
 }
 
-void	ft_adapt_points_to_screen(t_point **points, t_data *data, t_coord map_size)
+void	ft_adapt_pts_screen(t_point **points, t_data *data, t_coord map_size)
 {
 	int	i;
 	int	j;
