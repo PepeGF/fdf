@@ -2,8 +2,8 @@
 
 void	ft_map_middle_x(t_point **points, t_coord map_size, t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	double	x_max;
 	double	x_min;
 
@@ -29,8 +29,8 @@ void	ft_map_middle_x(t_point **points, t_coord map_size, t_data *data)
 
 void	ft_map_middle_y(t_point **points, t_coord map_size, t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	double	y_max;
 	double	y_min;
 
@@ -56,7 +56,7 @@ void	ft_map_middle_y(t_point **points, t_coord map_size, t_data *data)
 
 void	ft_get_scale(t_data *data)
 {
-	double vertical_scale;
+	double	vertical_scale;
 	double	horizontal_scale;
 
 	vertical_scale = (WIN_HEIGHT - 0.0) / data->map_dimension_y;
@@ -65,7 +65,4 @@ void	ft_get_scale(t_data *data)
 		data->scale = horizontal_scale;
 	else
 		data->scale = vertical_scale;
-//	printf("Mapa dibujado X: %d\nMapa dibujado Y: %d\n", data->map_dimension_x,data->map_dimension_y);
-//	printf("Escala vertical: %f\nEscala Horizontal: %f\n", vertical_scale, horizontal_scale);
-//	printf("Escala global: %f\n", data->scale);
 }

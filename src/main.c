@@ -21,7 +21,7 @@ int	main(int argc, char *argv[])
 	map_size.x = ft_map_length(raw_map->content);
 	map_size.y = ft_lstsize(raw_map);
 	ft_map_create_array(&points, map_size);
-	ft_map_int_array(raw_map, points, map_size);
+	ft_map_int_array(raw_map, points);
 	ft_map_raw_free(raw_map);
 	ft_convert_points_2d(points, map_size);
 
@@ -36,7 +36,7 @@ int	main(int argc, char *argv[])
 			&data.line_lenght, &data.endian);
 	
 	ft_adapt_pts_screen(points, &data, map_size);
-	ft_print_points(points, map_size);
+//	ft_print_points(points, map_size);
 	ft_triangle(&data, points, map_size);
 	ft_draw_vertex(points, &data, map_size);
 	//system ("leaks fdf");

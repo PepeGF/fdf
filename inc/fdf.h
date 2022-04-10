@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/09 13:36:00 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/10 11:43:57 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,11 @@
 # define MLX_ERROR 1
 # define WIN_WIDTH 1200
 # define WIN_HEIGHT 750
-//#define WIN_WIDTH 2000
-//#define WIN_HEIGHT 1200
 
-# include <stdio.h>
+//# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-// Linux
-//# include <X11/keysym.h>
-//# include "../mlx_linux/mlx.h"
-// Mac
 # include <mlx.h>
 # include "../gnl/get_next_line.h"
 # include "../libft/libft.h"
@@ -71,12 +65,12 @@ typedef struct s_coord
 /* Estructura para listas de puntos con coordenadas y color */
 typedef struct s_point
 {
-	int			x;
-	int			y;
-	int			z;
-	int			x_mod;
-	int			y_mod;
-	int			z_mod;
+	int				x;
+	int				y;
+	int				z;
+	int				x_mod;
+	int				y_mod;
+	int				z_mod;
 	unsigned int	color;
 }	t_point;
 
@@ -90,11 +84,10 @@ typedef struct s_bresenham
 	int	m;
 }	t_bresen;
 
-
 /* Manage map functions*/
 void	ft_map_read(t_list **raw_map, char *file);
 void	ft_map_raw_free(t_list *raw_map);
-void	ft_map_int_array(t_list *raw_map, t_point **points, t_coord map_size);
+void	ft_map_int_array(t_list *raw_map, t_point **points);
 int		ft_map_length(char *line);
 void	ft_map_free_array(t_point **points, t_coord map_size);
 void	ft_map_create_array(t_point ***points, t_coord map_size);

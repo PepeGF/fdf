@@ -3,7 +3,7 @@
 void	ft_bresen_pos_low(t_data *data, t_point point0, t_point point1)
 {
 	int	d[3];
-	int coord[2];
+	int	coord[2];
 
 	d[0] = point1.x_mod - point0.x_mod;
 	d[1] = point1.y_mod - point0.y_mod;
@@ -30,7 +30,7 @@ void	ft_bresen_pos_low(t_data *data, t_point point0, t_point point1)
 void	ft_bresen_pos_high(t_data *data, t_point point0, t_point point1)
 {
 	int	d[3];
-	int coord[2];
+	int	coord[2];
 
 	d[0] = point1.x_mod - point0.x_mod;
 	d[1] = point1.y_mod - point0.y_mod;
@@ -57,7 +57,7 @@ void	ft_bresen_pos_high(t_data *data, t_point point0, t_point point1)
 void	ft_bresen_neg_low(t_data *data, t_point point0, t_point point1)
 {
 	int	d[3];
-	int coord[2];
+	int	coord[2];
 
 	d[0] = point1.x_mod - point0.x_mod;
 	d[1] = point1.y_mod - point0.y_mod;
@@ -84,7 +84,7 @@ void	ft_bresen_neg_low(t_data *data, t_point point0, t_point point1)
 void	ft_bresen_neg_high(t_data *data, t_point point0, t_point point1)
 {
 	int	d[3];
-	int coord[2];
+	int	coord[2];
 
 	d[0] = point1.x_mod - point0.x_mod;
 	d[1] = point1.y_mod - point0.y_mod;

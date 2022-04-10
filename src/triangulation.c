@@ -1,6 +1,6 @@
 #include "../inc/fdf.h"
 
-void ft_swap_points(t_data *data, t_point *point0, t_point *point1)
+void	ft_swap_points(t_data *data, t_point *point0, t_point *point1)
 {
 	t_point	aux;
 
@@ -44,18 +44,18 @@ void	ft_triangle(t_data *data, t_point **points, t_coord map_size)
 {
 	int	i;
 	int	j;
-(void)map_size;
+
 	i = 0;
-	while (i < map_size.y )
+	while (i < map_size.y)
 	{
 		j = 0;
 		while (j < map_size.x)
 		{
 			if (i != map_size.y - 1 && j != map_size.x - 1)
 			{
-			ft_decide_line(data, points[i][j], points[i + 1][j]);
-			ft_decide_line(data, points[i][j], points[i][j + 1]);
-			ft_decide_line(data, points[i][j], points[i + 1][j + 1]);
+				ft_decide_line(data, points[i][j], points[i + 1][j]);
+				ft_decide_line(data, points[i][j], points[i][j + 1]);
+				ft_decide_line(data, points[i][j], points[i + 1][j + 1]);
 			}
 			else if (i == map_size.y - 1 && j != map_size.x - 1)
 				ft_decide_line(data, points[i][j], points[i][j + 1]);
