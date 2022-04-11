@@ -14,11 +14,11 @@
 # define FDF_H
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 1200
+#  define WIN_WIDTH 2560
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 750
+#  define WIN_HEIGHT 1440
 # endif
 
 # include <stdio.h>

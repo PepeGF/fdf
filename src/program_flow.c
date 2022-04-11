@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   program_flow.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/11 20:53:46 by josgarci          #+#    #+#             */
+/*   Updated: 2022/04/11 20:53:48 by josgarci         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
 void	ft_map_functions(t_list *raw_map, t_point **points, t_coord map_size,
@@ -15,10 +27,16 @@ void	ft_set_data(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
+	{
 		perror("Unable to create mlx pointer\n");
+		exit(2);
+	}
 	data->mlx_win = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FDF");
 	if (data->mlx_win == NULL)
+	{
 		perror("Unable to create window pointer\n");
+		exit(2);
+	}
 	data->img = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel),
 			&(data->line_lenght), &(data->endian));
