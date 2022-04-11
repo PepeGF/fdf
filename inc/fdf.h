@@ -6,7 +6,7 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:42:38 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/10 19:31:08 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/11 21:00:42 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1440
+#  define WIN_HEIGHT 1390
 # endif
 
 # include <stdio.h>
