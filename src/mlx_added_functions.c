@@ -6,12 +6,17 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 20:53:29 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/11 20:53:30 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/14 10:56:22 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
+/*
+ * This function is the drawing key. 
+ * It writes the info of each pixel into the image before put the image in
+ * the window.
+ */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -20,6 +25,9 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+/*
+ * To control what happens if ESC or Q is pressed.
+ */
 int	key_hook(int keycode, t_data *data)
 {
 	if (keycode == 53 || keycode == 12)

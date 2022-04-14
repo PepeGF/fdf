@@ -6,12 +6,16 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 20:54:02 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/11 20:54:03 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/14 11:32:37 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
+/*
+ * In case of slope < -1 and dx < 0 start and ending point must be swapped
+ * and after draw the line have to return to their original status.
+ */
 static void	ft_swap_points(t_data *data, t_point *point0, t_point *point1)
 {
 	t_point	aux;
@@ -31,6 +35,10 @@ static void	ft_swap_points(t_data *data, t_point *point0, t_point *point1)
 	point1->y_mod = aux.y_mod;
 }
 
+/*
+ * This function chooses which kind of line must be drawn knowing the 2D coord
+ * of the start and ending point.
+ */
 void	ft_decide_line(t_data *data, t_point point0, t_point point1)
 {
 	int	dx;
@@ -52,6 +60,10 @@ void	ft_decide_line(t_data *data, t_point point0, t_point point1)
 		ft_bresen_pos_high(data, point0, point1);
 }
 
+/*
+ * Creates pairs of points to draw the lines and send the info to the
+ * line type function.
+ */
 void	ft_triangle(t_data *data, t_point **points, t_coord map_size)
 {
 	int	i;

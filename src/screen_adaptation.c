@@ -6,12 +6,15 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 20:53:54 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/11 20:53:55 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/14 11:25:20 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
+/*
+ * Calculates the center of the X 2D map to center the drawing in the screen.
+ */
 void	ft_map_middle_x(t_point **points, t_coord map_size, t_data *data)
 {
 	int		i;
@@ -39,6 +42,9 @@ void	ft_map_middle_x(t_point **points, t_coord map_size, t_data *data)
 	data->map_dimension_x = x_max - x_min;
 }
 
+/*
+ * Calculates the center of the Y 2D map to center the drawing in the screen.
+ */
 void	ft_map_middle_y(t_point **points, t_coord map_size, t_data *data)
 {
 	int		i;
@@ -66,6 +72,10 @@ void	ft_map_middle_y(t_point **points, t_coord map_size, t_data *data)
 	data->map_dimension_y = y_max - y_min;
 }
 
+/*
+ * Calculates the appropiate scale deppending on map/drawing relation 
+ * on width and heigth 
+ */
 void	ft_get_scale(t_data *data)
 {
 	double	vertical_scale;

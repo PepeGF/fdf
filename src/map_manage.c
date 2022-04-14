@@ -6,14 +6,15 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 20:54:16 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/11 20:54:17 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/14 10:52:39 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-/* Función para guardar el mapa en memoria y no tener que abrir el archivo
- * del mapa varias veces
+/* 
+ * Function to keep map in memory and avoid open the file more than once
+ * Each line is allocated and added at the end of a list
  */
 void	ft_map_read(t_list **raw_map, char *file)
 {
@@ -33,8 +34,8 @@ void	ft_map_read(t_list **raw_map, char *file)
 	return ;
 }
 
-/* Esta función mira lo ancho que es el mapa (coord X) 
- * para el alto (Y) con contar los elementos de la lista de raw_map vale
+/* 
+ * This function counts how many elements are in the X axis
  */
 int	ft_map_length(char *line)
 {
@@ -55,6 +56,10 @@ int	ft_map_length(char *line)
 	return (length);
 }
 
+/* 
+ * This function writes the 3D coord of each point into the matrix.
+ * It splits every line and makes and atoi to save the Z coord.
+ */
 void	ft_map_int_array(t_list *raw_map, t_point **points)
 {
 	char	**splited;
@@ -82,6 +87,10 @@ void	ft_map_int_array(t_list *raw_map, t_point **points)
 	}
 }
 
+/*
+ * To allocate memory for the matrix and its elements.
+ * Each element is and struct which contains xyz and xy_mod
+ */
 void	ft_map_create_array(t_point ***points, t_coord map_size)
 {
 	int	i;

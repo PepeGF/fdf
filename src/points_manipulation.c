@@ -6,12 +6,17 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 20:53:36 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/11 20:53:37 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/14 11:02:04 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
+/*
+ * To convert 3D coord into 2D screen coordinates.
+ * It's multiplied by 200 to avoid rounding errors.
+ * Scale function will manage how big is the image.
+ */
 void	ft_convert_points_2d(t_point **points, t_coord map_size)
 {
 	double	x_aux;
@@ -37,6 +42,11 @@ void	ft_convert_points_2d(t_point **points, t_coord map_size)
 	return ;
 }
 
+/*
+ * To make the image fix in the screen. It centers the image and makes it
+ * bigger dimension 90% of the screen and addapt the other dimension to that
+ * 90%
+ */
 void	ft_adapt_pts_screen(t_point **points, t_data *data, t_coord map_size)
 {
 	int	i;
@@ -58,6 +68,9 @@ void	ft_adapt_pts_screen(t_point **points, t_data *data, t_coord map_size)
 	}
 }
 
+/* Funtion to draw just the vertex
+ * Usefull for testing porposes or when the points density is very high.
+ */
 void	ft_draw_vertex(t_point **points, t_data *data, t_coord map_size)
 {
 	int	i;

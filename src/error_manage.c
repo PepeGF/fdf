@@ -6,12 +6,16 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 20:52:51 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/11 20:52:52 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/14 10:41:23 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
+/*
+ * Basic arror management:
+ * Number of argument, route and file extension.
+ */
 void	ft_error_manage(int argc, char *argv[])
 {
 	int	len;

@@ -6,12 +6,18 @@
 /*   By: josgarci <josgarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 20:53:46 by josgarci          #+#    #+#             */
-/*   Updated: 2022/04/11 20:53:48 by josgarci         ###   ########.fr       */
+/*   Updated: 2022/04/14 11:08:40 by josgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
+/*
+ * Workflow of the first part of the program.
+ * After map reading prepares the struct matrix, frees the lines list,
+ * makes some math to convert 3D to 2D, gets the center of the drawing and
+ * calculates how big the image must be.
+ */
 void	ft_map_functions(t_list *raw_map, t_point **points, t_coord map_size,
 		t_data *data)
 {
@@ -23,6 +29,9 @@ void	ft_map_functions(t_list *raw_map, t_point **points, t_coord map_size,
 	ft_get_scale(data);
 }
 
+/*
+ * Prepares mlx_lib pointers.
+ */
 void	ft_set_data(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
@@ -42,6 +51,9 @@ void	ft_set_data(t_data *data)
 			&(data->line_lenght), &(data->endian));
 }
 
+/*
+ * Calls drawing functions.
+ */
 void	ft_drawing(t_point **points, t_data *data, t_coord map_size)
 {
 	ft_adapt_pts_screen(points, data, map_size);
